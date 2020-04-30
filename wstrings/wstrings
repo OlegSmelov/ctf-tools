@@ -1,0 +1,14 @@
+#!/bin/bash
+set -eu
+
+strings() {
+    command strings --radix x --encoding "$@"
+}
+
+cat "$@" | tee \
+  >(strings S) \
+  >(strings b) \
+  >(strings l) \
+  >(strings B) \
+  >(strings L) \
+  >/dev/null
