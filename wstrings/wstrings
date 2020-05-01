@@ -11,4 +11,4 @@ cat "$@" | tee \
   >(strings l) \
   >(strings B) \
   >(strings L) \
-  >/dev/null
+  >/dev/null | cat
