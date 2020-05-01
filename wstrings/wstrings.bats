@@ -24,3 +24,8 @@
   result="$(echo AAAAaAAAAGUAAABsAAAAbAAAAG8K= | base64 -d | ./wstrings)"
   [ "$result" == "      0 hello" ]
 }
+
+@test "can take input from file" {
+  result="$(./wstrings <(echo hello))"
+  [ "$result" == "      0 hello" ]
+}
