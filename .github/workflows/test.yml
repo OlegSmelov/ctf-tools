@@ -17,4 +17,5 @@ jobs:
         sudo apt install bats
     - name: Bats tests
       run: |
-        cd wstrings && bats wstrings.bats
+        export PATH="$PWD/bin:$PATH"
+        find . -name \*.bats | xargs bats
