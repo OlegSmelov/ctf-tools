@@ -6,16 +6,30 @@ on:
     branches:
       - master
 jobs:
-  test:
-    name: Tests
+  test_ubuntu:
+    name: Ubuntu tests
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
-    - name: Install bats
+    - name: Install dependencies
       run: |
         sudo apt install bats
     - name: Bats tests
       run: |
         export PATH="$PWD/bin:$PATH"
+        find . -name \*.bats | xargs bats
+  test_macos:
+    name: macOS tests
+    runs-on: macos-latest
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        brew install bats coreutils binutils
+    - name: Bats tests
+      run: |
+        BREW_PREFIX="$(brew --prefix)"
+        export PATH="$PWD/bin:$BREW_PREFIX/opt/binutils/bin:$BREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
         find . -name \*.bats | xargs bats
